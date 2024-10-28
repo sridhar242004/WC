@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethnic Elegance - Lehengas Collection</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary: #D4AF37;
+            --secondary: #8B4513;
+            --light: #FDF5E6;
+            --dark: #2C1810;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+        }
+
+        .navbar {
+            background-color: white !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('pngtree-an-indian-woman-wearing-a-peach-lehenga-picture-image_3152234.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: -50px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-card {
+            border: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            background: white;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding-top: 133%;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            transition: bottom 0.3s ease;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #ddd;
+        }
+
+        .color-swatch.active {
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .pagination .page-link {
+            color: var(--dark);
+            border: none;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .pagination .page-link:hover,
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filter-section {
+                margin-top: 0;
+            }
+            
+            .product-actions {
+                bottom: 0;
+                opacity: 1;
+            }
+            
+            .page-header {
+                height: 30vh;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .filter-dropdown {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ethnic Elegance</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="c.html">Sarees</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="l.html">Lehengas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-primary rounded-pill">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="header-title">Exquisite Lehenga Collection</h1>
+            <p class="lead text-white">Discover our handpicked selection of designer lehengas</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Filters -->
+        <div class="filter-section mb-5">
+            <div class="row g-3">
+                <div class="col-md-3 col-6">
+                    <select class="form-select filter-dropdown">
+                        <option>Sort By</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest First</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-6">
+                    <select class="form-select filter-dropdown">
+                        <option>Price Range</option>
+                        <option>Under ₹10,000</option>
+                        <option>₹10,000 - ₹20,000</option>
+                        <option>Above ₹20,000</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-6">
+                    <select class="form-select filter-dropdown">
+                        <option>Fabric</option>
+                        <option>Silk</option>
+                        <option>Georgette</option>
+                        <option>Velvet</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-6">
+                    <select class="form-select filter-dropdown">
+                        <option>Occasion</option>
+                        <option>Bridal</option>
+                        <option>Party Wear</option>
+                        <option>Festival</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="row g-4">
+            <!-- Product Card 1 -->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="OIP (4).jpg" class="product-image" alt="Bridal Lehenga">
+                        <span class="product-badge">New Arrival</span>
+                        <button class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="product-actions">
+                            <button class="action-btn">Quick View</button>
+                            <button class="action-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Royal Bridal Lehenga</h5>
+                        <p class="card-text text-muted mb-2">Handcrafted Bridal Collection</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">₹45,999</span>
+                            <div class="color-options">
+                                <span class="color-swatch active" style="background-color: #FF0000;"></span>
+                                <span class="color-swatch" style="background-color: #00FF00;"></span>
+                                <span class="color-swatch" style="background-color: #0000FF;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="OIP (5).jpg" class="product-image" alt="Party Wear Lehenga">
+                        <button class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="product-actions">
+                            <button class="action-btn">Quick View</button>
+                            <button class="action-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Designer Party Lehenga</h5>
+                        <p class="card-text text-muted mb-2">Contemporary Collection</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">₹28,999</span>
+                            <div class="color-options">
+                                <span class="color-swatch" style="background-color: #800080;"></span>
+                                <span class="color-swatch" style="background-color: #FFA500;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Product Cards with the same structure -->
+            <!-- Cards 3-8 -->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="embroidered-net-lehenga-in-mustard-v1-lyc917.jpg" class="product-image" alt="Festival Lehenga">
+                        <span class="product-badge">Sale</span>
+                        <button class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="product-actions">
+                            <button class="action-btn">Quick View</button>
+                            <button class="action-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Festival Special Lehenga</h5>
+                        <p class="card-text text-muted mb-2">Festive Collection</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">₹32,999</span>
+                            <div class="color-options">
+                                <span class="color-swatch" style="background-color: #FFD700;"></span>
+                                <span class="color-swatch" style="background-color: #C0C0C0;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat similar product cards to fill the grid -->
+
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Wishlist functionality
+        const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+        wishlistButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.style.color = '#D4AF37';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    icon.style.color = '';
+                }
+            });
+        });
+
+        // Color swatch selection
+        const colorSwatches = document.querySelectorAll('.color-swatch');
+        colorSwatches.forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                // Remove active class from siblings
+                const siblings = this.parentElement.querySelectorAll('.color-swatch');
+                siblings.forEach(sibling => sibling.classList.remove('active'));
+                // Add active class to clicked swatch
+                this.classList.add('active');
+            });
+        });
+
+        // Filter functionality
+        const filterDropdowns = document.querySelectorAll('.filter-dropdown');
+        filterDropdowns.forEach(dropdown => {
+            dropdown.addEventListener('change', function() {
+                // Add filter logic here
+                console.log('Filter changed:', this.value);
+            });
+        });
+
+        // Quick view functionality
+        const quickViewButtons = document.querySelectorAll('button.action-btn');
+        quickViewButtons.forEach(button => {
+            if (button.textContent === 'Quick View') {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.product-card');
+                    const productName = card.querySelector('.card-title').textContent;
+                    const productPrice = card.querySelector('.fw-bold').textContent;
+                    const productImage = card.querySelector('.product-image').src;
+                    
+                    // You can create a modal here or handle the quick view however you prefer
+                    alert(`Quick View:\n${productName}\n${productPrice}`);
+                });
+            }
+        });
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('button.action-btn');
+        addToCartButtons.forEach(button => {
+            if (button.textContent === 'Add to Cart') {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.product-card');
+                    const productName = card.querySelector('.card-title').textContent;
+                    const productPrice = card.querySelector('.fw-bold').textContent;
+                    
+                    // Update cart count
+                    const cartCount = document.querySelector('.badge');
+                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                    
+                    // Add animation
+                    cartCount.style.animation = 'none';
+                    cartCount.offsetHeight; // Trigger reflow
+                    cartCount.style.animation = 'fadeInUp 0.3s ease';
+                    
+                    // Show notification
+                    showNotification(`${productName} added to cart!`);
+                });
+            }
+        });
+
+        // Notification system
+        function showNotification(message) {
+            // Create notification element if it doesn't exist
+            let notification = document.getElementById('notification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--primary);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 4px;
+                    transform: translateX(150%);
+                    transition: transform 0.3s ease;
+                    z-index: 1000;
+                `;
+                document.body.appendChild(notification);
+            }
+
+            // Update message and show notification
+            notification.textContent = message;
+            notification.style.transform = 'translateX(0)';
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(150%)';
+            }, 3000);
+        }
+
+        // Infinite scroll simulation (optional)
+        let isLoading = false;
+        window.addEventListener('scroll', function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                if (!isLoading) {
+                    isLoading = true;
+                    // Simulate loading more products
+                    setTimeout(() => {
+                        // Add your logic to load more products here
+                        isLoading = false;
+                    }, 1000);
+                }
+            }
+        });
+
+        // Mobile responsive adjustments
+        function adjustForMobile() {
+            if (window.innerWidth <= 768) {
+                // Add any mobile-specific adjustments here
+                const productActions = document.querySelectorAll('.product-actions');
+                productActions.forEach(action => {
+                    action.style.bottom = '0';
+                });
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', adjustForMobile);
+        window.addEventListener('resize', adjustForMobile);
+
+        // Optional: Add lazy loading for images
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        }
+    </script>
+</body>
+</html>
